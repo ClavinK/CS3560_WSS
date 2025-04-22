@@ -74,4 +74,19 @@ public class Player {
                            " | Water: " + currentWater +
                            " | Gold: " + gold);
     }
+
+    public int getFood() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFood'");
+    }
+
+    public int getWater() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWater'");
+    }
+
+    public int getStrength() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStrength'");
+    }
 }

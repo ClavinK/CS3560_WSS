@@ -1,21 +1,46 @@
-// GreedyBrain.java
 package src;
 
 import src.brain.brain;
 
 public class greedyBrain implements brain {
+
     @Override
     public void makeMove(Player player, map map) {
         Position current = player.getPosition();
         int x = current.getX();
         int y = current.getY();
 
-        // Try moving east if possible, otherwise rest
-        Position nextEast = new Position(x + 1, y);
-        TerrainSquare nextSquare = map.getSquare(nextEast);
+        TerrainSquare bestSquare = null;
+        int maxValue = 0;
 
-        if (nextSquare != null && player.canEnter(nextSquare)) {
-            player.enter(nextSquare);
+        // Check all 4 cardinal directions: N, S, E, W
+        Position[] directions = {
+            new Position(x + 1, y), // East
+            new Position(x - 1, y), // West
+            new Position(x, y + 1), // South
+            new Position(x, y - 1)  // North
+        };
+
+        for (Position pos : directions) {
+            TerrainSquare square = map.getSquare(pos);
+            if (square != null && player.canEnter(square)) {
+                int value = 0;
+
+                for (item item : square.getItems()) {
+                    if (item instanceof FoodBonus fb) value += fb.isRepeating() ? 3 : 2;
+                    else if (item instanceof WaterBonus wb) value += wb.isRepeating() ? 3 : 2;
+                    else if (item instanceof GoldBonus gb) value += gb.isRepeating() ? 2 : 1;
+                }
+
+                if (value > maxValue) {
+                    maxValue = value;
+                    bestSquare = square;
+                }
+            }
+        }
+
+        if (bestSquare != null) {
+            player.enter(bestSquare);
         } else {
             player.rest();
         }

@@ -6,10 +6,10 @@ package src;
  */
 public enum TerrainType {
     PLAINS(1, 1, 1),
-    MOUNTAIN(3, 2, 2),
-    DESERT(2, 1, 3),
-    SWAMP(2, 3, 2),
-    FOREST(2, 2, 2);
+    MOUNTAIN(2, 2, 2),      // reduced movement cost
+    DESERT(2, 1, 2),        // reduced water cost
+    SWAMP(2, 2, 2),         // reduced food cost
+    FOREST(2, 1, 1);        // survival-friendly
 
     private final int movementCost;
     private final int foodCost;
@@ -31,5 +31,10 @@ public enum TerrainType {
 
     public int getWaterCost() {
         return waterCost;
+    }
+
+    @Override
+    public String toString() {
+        return name() + " (M:" + movementCost + ", F:" + foodCost + ", W:" + waterCost + ")";
     }
 }
