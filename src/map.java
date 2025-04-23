@@ -3,13 +3,13 @@ package src;
 
 import java.util.Random;
 
-public class map {
+public class Map {
     private TerrainSquare[][] grid;
     private int width;
     private int height;
     private Random rand = new Random();
 
-    public map(int width, int height, String difficulty) {
+    public Map(int width, int height, String difficulty) {
         this.width = width;
         this.height = height;
         this.grid = new TerrainSquare[width][height];

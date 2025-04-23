@@ -1,12 +1,10 @@
 // SurvivorBrain.java
 package src;
 
-import src.brain.brain;
-
 public class survivorBrain implements brain {
 
     @Override
-    public void makeMove(Player player, map map) {
+    public void makeMove(Player player, Map map) {
         Position current = player.getPosition();
         int x = current.getX();
         int y = current.getY();

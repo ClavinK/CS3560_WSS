@@ -1,10 +1,8 @@
 // WSS.java
 package src;
 
-import src.brain.brain;
-import src.gui.wssGUI;
-
 import javax.swing.*;
+import src.gui.wssGUI;
 
 public class wss {
     public static void main(String[] args) {
@@ -41,7 +39,7 @@ public class wss {
         // Create map and player
         int width = 10;
         int height = 5;
-        map map = new map(width, height, difficulty);
+        Map map = new Map(width, height, difficulty);
         Player player = new Player(10, 10, 10);
         player.setPosition(new Position(0, height / 2));
 

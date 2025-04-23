@@ -1,7 +1,4 @@
-package src.brain;
-
-import src.Player;
-import src.map;
+package src;
 
 /**
  * Brain interface to control how a player makes decisions each turn.
@@ -12,5 +9,5 @@ public interface brain {
      * @param player the player to control
      * @param map the game map
      */
-    void makeMove(Player player, map map);
+    void makeMove(Player player, Map map);
 }
