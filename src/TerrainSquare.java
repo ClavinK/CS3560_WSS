@@ -10,8 +10,8 @@ import java.util.List;
 public class TerrainSquare {
     private TerrainType type;
     private Position position;
-    private List<item> items;
-    private trader trader;
+    private List<Item> items;
+    private Trader trader;
 
     public TerrainSquare(TerrainType type, Position position) {
         this.type = type;
@@ -28,25 +28,25 @@ public class TerrainSquare {
         return position;
     }
 
-    public List<item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public trader getTrader() {
+    public Trader getTrader() {
         return trader;
     }
 
-    public void setTrader(trader trader) {
+    public void setTrader(Trader trader) {
         this.trader = trader;
     }
 
-    public void addItem(item item) {
+    public void addItem(Item item) {
         items.add(item);
     }
 
     public void collectItems(Player p) {
-        List<item> toRemove = new ArrayList<>();
-        for (item item : items) {
+        List<Item> toRemove = new ArrayList<>();
+        for (Item item : items) {
             item.collect(p);
             if (!item.isRepeating()) {
                 toRemove.add(item);

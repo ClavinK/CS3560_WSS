@@ -4,10 +4,10 @@ package src;
 /**
  * Abstract base class for items that can be found in a TerrainSquare.
  */
-public abstract class item {
+public abstract class Item {
     protected boolean repeating;
 
-    public item(boolean repeating) {
+    public Item(boolean repeating) {
         this.repeating = repeating;
     }
 
@@ -18,7 +18,7 @@ public abstract class item {
     public abstract void collect(Player p);
 }
 
-class FoodBonus extends item {
+class FoodBonus extends Item {
     private int amount;
 
     public FoodBonus(int amount, boolean repeating) {
@@ -33,7 +33,7 @@ class FoodBonus extends item {
     }
 }
 
-class WaterBonus extends item {
+class WaterBonus extends Item {
     private int amount;
 
     public WaterBonus(int amount, boolean repeating) {
@@ -48,7 +48,7 @@ class WaterBonus extends item {
     }
 }
 
-class GoldBonus extends item {
+class GoldBonus extends Item {
     private int amount;
 
     public GoldBonus(int amount, boolean repeating) {

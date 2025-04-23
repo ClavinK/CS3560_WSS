@@ -38,7 +38,7 @@ public class map {
                 // 10% chance to spawn a trader
                 if (rand.nextDouble() < 0.1) {
                     int t = rand.nextInt(3);
-                    trader trader = switch (t) {
+                    Trader trader = switch (t) {
                         case 0 -> new bargainerTrader();
                         case 1 -> new greedyTrader();
                         case 2 -> new impatientTrader();

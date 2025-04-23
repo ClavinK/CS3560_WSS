@@ -26,7 +26,7 @@ public class greedyBrain implements brain {
             if (square != null && player.canEnter(square)) {
                 int value = 0;
 
-                for (item item : square.getItems()) {
+                for (Item item : square.getItems()) {
                     if (item instanceof FoodBonus fb) value += fb.isRepeating() ? 3 : 2;
                     else if (item instanceof WaterBonus wb) value += wb.isRepeating() ? 3 : 2;
                     else if (item instanceof GoldBonus gb) value += gb.isRepeating() ? 2 : 1;
