@@ -21,7 +21,7 @@ public class wss {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 difficulties,
-                "Medium"
+                "Easy"
         );
 
         // Prompt for brain type
@@ -37,8 +37,22 @@ public class wss {
         );
 
         // Create map and player
-        int width = 10;
-        int height = 5;
+        int width = 0;
+        int height = 0;
+        switch(difficulty) {
+            case "Medium" -> {
+                width = 10;
+                height = 10;
+            }
+            case "Hard" -> {
+                width = 15;
+                height = 15;
+            }
+            default -> {
+                width = 5;
+                height = 5;
+            }
+        }
         Map map = new Map(width, height, difficulty);
         Player player = new Player(10, 10, 10);
         player.setPosition(new Position(0, height / 2));
