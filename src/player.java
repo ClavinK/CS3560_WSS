@@ -38,6 +38,7 @@ public class Player {
         position = square.getPosition();
         square.collectItems(this);
         System.out.println("Moved to square " + position + " (" + square.getType() + ")");
+        this.engageTrade(square);
     }
 
     public void rest() {
@@ -45,6 +46,39 @@ public class Player {
         currentStrength = Math.min(maxStrength, currentStrength + 2);
         currentFood = Math.max(0, currentFood - 1);
         currentWater = Math.max(0, currentWater - 1);
+    }
+
+    public void engageTrade(TerrainSquare square) {
+        Trader trader = square.getTrader();
+        if (trader != null) {
+            System.out.println("Player encounters a trader!");
+            Offer playerOffer = new Offer(0,0,3,2,2,0);
+            Offer counterOffer;
+
+            do {
+                counterOffer = trader.evaluateOffer(playerOffer);
+                if (counterOffer == null) {
+                    this.applyTrade(playerOffer);
+                    // this.getFood();
+                    // this.getGold();
+                    // this.getWater();
+                    // this.getStrength();
+                } else {
+                    System.out.println(counterOffer);
+                    playerOffer = counterOffer;
+                }
+            } while (counterOffer != null);
+        }
+    }
+
+    public void applyTrade(Offer offer) {
+        currentFood = Math.max(0, currentFood - offer.getOfferedWater());
+        currentWater = Math.max(0, currentWater - offer.getOfferedWater());
+        gold = Math.max(0, gold - offer.getOfferedGold());
+
+        currentFood = Math.min(maxFood, currentFood + offer.getRequestedFood());
+        currentWater = Math.min(maxWater, currentWater + offer.getRequestedWater());
+        gold += offer.getRequestedGold();
     }
 
     public void addFood(int amount) {
@@ -75,18 +109,19 @@ public class Player {
                            " | Gold: " + gold);
     }
 
-    public int getFood() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFood'");
+    public void getFood() {
+        System.out.println("Current Food: " + currentFood);
     }
 
-    public int getWater() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWater'");
+    public void getWater() {
+        System.out.println("Current Water: " + currentWater);
     }
 
-    public int getStrength() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStrength'");
+    public void getGold() {
+        System.out.println("Current Gold: " + gold);
+    }
+
+    public void getStrength() {
+        System.out.println("Current Strength: " + currentStrength);
     }
 }

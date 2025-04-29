@@ -39,10 +39,10 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Offer: [Give → " +
+        return "Offer: [Give: " +
                 offeredFood + " food, " +
                 offeredWater + " water, " +
-                offeredGold + " gold | Receive → " +
+                offeredGold + " gold | Receive: " +
                 requestedFood + " food, " +
                 requestedWater + " water, " +
                 requestedGold + " gold]";

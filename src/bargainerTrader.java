@@ -10,13 +10,13 @@ public class bargainerTrader implements Trader {
         int requestedTotal = playerOffer.getRequestedFood() + playerOffer.getRequestedWater() + playerOffer.getRequestedGold();
 
         if (offeredTotal >= requestedTotal) {
-            System.out.println("Trader accepts your offer.");
+            System.out.println("Bargainer Trader: 'I accept your offer.'");
             return null; // Accepts the trade
         } else if (maxCounterOffers <= 0) {
             System.out.println("Bargainer Trader: 'Aw bugger off! I don't want to see your face again!'");
             return null;
         } else {
-            System.out.println("Trader counters your offer.");
+            System.out.println("Bargainer Trader: 'How about this deal instead?'");
             maxCounterOffers--;
             // Returns a slightly more demanding counter-offer
             return new Offer(

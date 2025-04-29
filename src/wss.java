@@ -33,7 +33,7 @@ public class wss {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 brains,
-                "Greedy"
+                "Explorer"
         );
 
         // Create map and player
@@ -77,9 +77,9 @@ public class wss {
         }
 
         if (player.hasWon(map.getWidth())) {
-            System.out.println("\n🎉 Player has successfully exited the wilderness! 🎉");
+            System.out.println("\nPlayer has successfully exited the wilderness!");
         } else {
-            System.out.println("\n💀 Player did not survive the wilderness. 💀");
+            System.out.println("\nPlayer did not survive the wilderness.");
         }
     }
 }

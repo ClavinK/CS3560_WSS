@@ -27,5 +27,6 @@ public class explorerBrain implements brain {
         // If no preferred direction is available, rest
         player.rest();
         player.printStatus();
+        
     }
 }
