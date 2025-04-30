@@ -3,7 +3,7 @@ package src;
 /**
  * Brain interface to control how a player makes decisions each turn.
  */
-public interface brain {
+public interface Brain {
     /**
      * Makes a decision for the player each turn.
      * @param player the player to control

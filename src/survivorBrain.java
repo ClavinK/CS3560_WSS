@@ -1,7 +1,7 @@
-// SurvivorBrain.java
 package src;
+import java.util.List;
 
-public class survivorBrain implements brain {
+public class survivorBrain implements Brain {
 
     @Override
     public void makeMove(Player player, Map map) {
@@ -9,9 +9,10 @@ public class survivorBrain implements brain {
         int x = current.getX();
         int y = current.getY();
 
-        boolean lowFood = player.getFood() <= 3;
-        boolean lowWater = player.getWater() <= 3;
-        boolean lowStrength = player.getStrength() <= 3;
+        //  Use returning getters instead of print-only methods
+        boolean lowFood = player.getFoodAmount() <= 3;
+        boolean lowWater = player.getWaterAmount() <= 3;
+        boolean lowStrength = player.getStrengthAmount() <= 3;
 
         Position[] directions = {
             new Position(x, y - 1), // North
@@ -20,12 +21,13 @@ public class survivorBrain implements brain {
             new Position(x - 1, y)  // West
         };
 
-        // Priority: seek nearby food/water if low
+        //  Priority: seek nearby food/water if low
         for (Position pos : directions) {
             TerrainSquare square = map.getSquare(pos);
             if (square != null && player.canEnter(square)) {
-                boolean hasFood = square.getItems().stream().anyMatch(i -> i instanceof FoodBonus);
-                boolean hasWater = square.getItems().stream().anyMatch(i -> i instanceof WaterBonus);
+                List<Item> items = square.getItems();
+                boolean hasFood = items.stream().anyMatch(i -> i instanceof FoodBonus);
+                boolean hasWater = items.stream().anyMatch(i -> i instanceof WaterBonus);
 
                 if ((lowFood && hasFood) || (lowWater && hasWater)) {
                     player.enter(square);
@@ -35,14 +37,14 @@ public class survivorBrain implements brain {
             }
         }
 
-        // Rest more aggressively when strength is low
+        //  Rest more aggressively when strength is low
         if (lowStrength) {
             player.rest();
             player.printStatus();
             return;
         }
 
-        // Move east if safe
+        //  Move east if safe, otherwise rest
         Position east = new Position(x + 1, y);
         TerrainSquare eastSquare = map.getSquare(east);
 

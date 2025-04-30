@@ -58,7 +58,7 @@ public class wss {
         player.setPosition(new Position(0, height / 2));
 
         // Select brain
-    brain brain = switch (brainChoice) {
+    Brain brain = switch (brainChoice) {
             case "Explorer" -> new explorerBrain();
             case "Survivor" -> new survivorBrain();
             default -> new greedyBrain();

@@ -1,6 +1,6 @@
 package src;
 
-public class explorerBrain implements brain {
+public class explorerBrain implements Brain {
 
     @Override
     public void makeMove(Player player, Map map) {
