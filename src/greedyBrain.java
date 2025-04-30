@@ -1,5 +1,45 @@
 package src;
 
+import java.util.List;
+
+public class greedyBrain implements Brain {
+
+    @Override
+    public void makeMove(Player player, Map map) {
+        Vision vision = new Vision(player, map);
+        List<TerrainSquare> visible = vision.getVisibleSquares();
+
+        TerrainSquare bestSquare = null;
+        int maxValue = 0;
+
+        for (TerrainSquare square : visible) {
+            if (!player.canEnter(square)) continue;
+
+            int value = 0;
+            for (Item item : square.getItems()) {
+                if (item instanceof FoodBonus fb) value += fb.isRepeating() ? 3 : 2;
+                else if (item instanceof WaterBonus wb) value += wb.isRepeating() ? 3 : 2;
+                else if (item instanceof GoldBonus gb) value += gb.isRepeating() ? 2 : 1;
+            }
+
+            if (value > maxValue) {
+                maxValue = value;
+                bestSquare = square;
+            }
+        }
+
+        if (bestSquare != null) {
+            player.enter(bestSquare);
+        } else {
+            player.rest();
+        }
+
+        player.printStatus();
+    }
+}
+
+/*package src;
+
 public class greedyBrain implements Brain {
 
     @Override
@@ -46,3 +86,4 @@ public class greedyBrain implements Brain {
         player.printStatus();
     }
 }
+ */

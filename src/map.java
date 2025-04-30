@@ -28,11 +28,11 @@ public class Map {
                 // 35% chance to spawn a bonus item
                 if (rand.nextDouble() < 0.35) {
                     int itemType = rand.nextInt(3);
-                    switch (itemType) {
-                        case 0 -> square.addItem(new FoodBonus(rand.nextInt(3) + 2, false));
-                        case 1 -> square.addItem(new WaterBonus(rand.nextInt(3) + 2, false));
-                        case 2 -> square.addItem(new GoldBonus(rand.nextInt(2) + 1, false));
-                    }
+                  switch (itemType) {
+    case 0 -> square.addItem(new FoodBonus(rand.nextInt(3) + 2, false));
+    case 1 -> square.addItem(new WaterBonus(rand.nextInt(3) + 2, false));
+    case 2 -> square.addItem(new GoldBonus(rand.nextInt(2) + 1, false));
+}
                 }
 
                 // 15% chance to spawn a trader
