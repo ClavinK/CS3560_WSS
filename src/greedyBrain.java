@@ -17,10 +17,10 @@ public class greedyBrain implements Brain {
         }
 
         TerrainSquare bestSquare = null;
-        int maxValue = 0;
+        int maxValue = Integer.MIN_VALUE;
 
         for (TerrainSquare square : visible) {
-            if (square == null || !player.canEnter(square)) continue;
+            if (square == null && !player.canEnter(square)) continue;
 
             int value = calculateSquareValue(square);
             if (value > maxValue) {
@@ -34,7 +34,7 @@ public class greedyBrain implements Brain {
         } else {
             Collections.shuffle(visible);
             for(TerrainSquare square : visible) {
-                if(square == null || player.canEnter(bestSquare)) {
+                if(square != null || player.canEnter(bestSquare)) {
                     player.enter(bestSquare);
                     player.printStatus();
                     return;
@@ -70,7 +70,6 @@ public class greedyBrain implements Brain {
         return value;
     }               
 }
-
 
 /*package src;
 
