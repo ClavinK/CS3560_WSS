@@ -1,11 +1,14 @@
 package src;
 
+import src.gui.wssGUI;
+
 public class Player {
     private int maxStrength, maxWater, maxFood;
     private int currentStrength, currentWater, currentFood, gold;
     private Position position;
+    private wssGUI gui; // ✅ Link to GUI
 
-    public Player(int maxStrength, int maxWater, int maxFood) {
+    public Player(int maxStrength, int maxWater, int maxFood, wssGUI gui) {
         this.maxStrength = maxStrength;
         this.maxWater = maxWater;
         this.maxFood = maxFood;
@@ -13,7 +16,8 @@ public class Player {
         this.currentWater = maxWater;
         this.currentFood = maxFood;
         this.gold = 0;
-        this.position = new Position(0, 0); // default start
+        this.position = new Position(0, 0);
+        this.gui = gui;
     }
 
     public Position getPosition() {
@@ -36,6 +40,7 @@ public class Player {
         currentWater -= square.getWaterCost();
         position = square.getPosition();
         square.collectItems(this);
+
         System.out.println("Moved to square " + position + " (" + square.getType() + ")");
         this.engageTrade(square);
     }
@@ -51,20 +56,54 @@ public class Player {
         Trader trader = square.getTrader();
         if (trader != null) {
             System.out.println("Player encounters a trader!");
-            Offer playerOffer = new Offer(0, 0, 3, 2, 2, 0);
+            printStatus();
+
+            Offer playerOffer;
             Offer counterOffer;
 
             do {
+                int offerFood = getIntInput("Enter amount of FOOD to OFFER:");
+                int offerWater = getIntInput("Enter amount of WATER to OFFER:");
+                int offerGold = getIntInput("Enter amount of GOLD to OFFER:");
+
+                int requestFood = getIntInput("Enter amount of FOOD you want to RECEIVE:");
+                int requestWater = getIntInput("Enter amount of WATER you want to RECEIVE:");
+                int requestGold = getIntInput("Enter amount of GOLD you want to RECEIVE:");
+
+                playerOffer = new Offer(
+                    offerFood, offerWater, offerGold,
+                    requestFood, requestWater, requestGold
+                );
+
+                // Print offer summary
+                System.out.println("You offered: " + offerFood + " Food, " +
+                                                  offerWater + " Water, " +
+                                                  offerGold + " Gold");
+                System.out.println("You requested: " + requestFood + " Food, " +
+                                                    requestWater + " Water, " +
+                                                    requestGold + " Gold");
+
                 counterOffer = trader.evaluateOffer(playerOffer);
+
                 if (counterOffer == null) {
-                    this.applyTrade(playerOffer);
+                    applyTrade(playerOffer);
+                    System.out.println("Trade accepted.");
                 } else {
-                    System.out.println(counterOffer);
-                    playerOffer = counterOffer;
+                    System.out.println("Trader counter-offered:");
+                    System.out.println("Offer: " + counterOffer.getOfferedFood() + " Food, " +
+                                               counterOffer.getOfferedWater() + " Water, " +
+                                               counterOffer.getOfferedGold() + " Gold");
+                    System.out.println("Wants: " + counterOffer.getRequestedFood() + " Food, " +
+                                               counterOffer.getRequestedWater() + " Water, " +
+                                               counterOffer.getRequestedGold() + " Gold");
                 }
+
             } while (counterOffer != null);
         }
     }
+
+
+
 
     public void applyTrade(Offer offer) {
         currentFood = Math.max(0, currentFood - offer.getOfferedFood());
@@ -104,7 +143,6 @@ public class Player {
                            " | Gold: " + gold);
     }
 
-    // New getter methods for brains
     public int getFoodAmount() {
         return currentFood;
     }
@@ -117,7 +155,6 @@ public class Player {
         return currentStrength;
     }
 
-    // Optional: renamed print methods to avoid confusion
     public void printFood() {
         System.out.println("Current Food: " + currentFood);
     }
@@ -132,5 +169,38 @@ public class Player {
 
     public void printStrength() {
         System.out.println("Current Strength: " + currentStrength);
+    }
+
+    //Get input from GUI
+    private int getIntInput(String prompt) {
+        System.out.println(prompt);
+        System.out.println("Type a number below and press Enter...");
+
+        final Object lock = new Object();
+        final String[] inputHolder = new String[1];
+
+        gui.setTradeSubmitListener(() -> {
+            synchronized (lock) {
+                inputHolder[0] = gui.getTradeInput();
+                gui.clearTradeInput();
+                lock.notify();
+            }
+        });
+
+        synchronized (lock) {
+            try {
+                lock.wait(); // Wait for submit
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+
+        try {
+            return Integer.parseInt(inputHolder[0]);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Defaulting to 0.");
+            return 0;
+        }
     }
 }
