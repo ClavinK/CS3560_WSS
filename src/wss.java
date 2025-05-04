@@ -7,7 +7,7 @@ import src.gui.wssGUI;
 public class wss {
     public static void main(String[] args) {
         // Launch the animated GUI terminal
-        javax.swing.SwingUtilities.invokeLater(() -> new wssGUI());
+    	wssGUI gui = new wssGUI();
 
         // Wait for GUI to load
         try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -35,7 +35,8 @@ public class wss {
                 brains,
                 "Explorer"
         );
-
+        
+        
         // Create map and player
         int width = 0;
         int height = 0;
@@ -54,7 +55,7 @@ public class wss {
             }
         }
         Map map = new Map(width, height, difficulty);
-        Player player = new Player(10, 10, 10);
+        Player player = new Player(10, 10, 10, gui);
         player.setPosition(new Position(0, height / 2));
 
         // Select brain
