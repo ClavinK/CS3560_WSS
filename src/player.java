@@ -6,7 +6,7 @@ public class Player {
     private int maxStrength, maxWater, maxFood;
     private int currentStrength, currentWater, currentFood, gold;
     private Position position;
-    private wssGUI gui; // ✅ Link to GUI
+    private wssGUI gui; //Link to GUI
 
     public Player(int maxStrength, int maxWater, int maxFood, wssGUI gui) {
         this.maxStrength = maxStrength;
