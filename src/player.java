@@ -174,7 +174,6 @@ public class Player {
     //Get input from GUI
     private int getIntInput(String prompt) {
         System.out.println(prompt);
-        System.out.println("Type a number below and press Enter...");
 
         final Object lock = new Object();
         final String[] inputHolder = new String[1];

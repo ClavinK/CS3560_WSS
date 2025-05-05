@@ -36,6 +36,10 @@ public class TerrainSquare {
         return trader;
     }
 
+    public boolean hasTrader() {
+        return trader != null;
+    }
+
     public void setTrader(Trader trader) {
         this.trader = trader;
     }

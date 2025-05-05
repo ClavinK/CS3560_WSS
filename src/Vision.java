@@ -32,6 +32,14 @@ public class Vision {
         return visible;
     }
 
+    protected Player getPlayer() {
+        return player;
+    }
+
+    protected Map getMap() {
+        return map;
+    }
+
 
     public List<TerrainSquare> getSquaresWithItem(Class<? extends Item> itemType) {
         List<TerrainSquare> matches = new ArrayList<>();
