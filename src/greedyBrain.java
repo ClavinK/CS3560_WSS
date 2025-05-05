@@ -1,5 +1,6 @@
 package src;
 
+import java.util.Collections;
 import java.util.List;
 
 public class greedyBrain implements Brain {
@@ -9,14 +10,19 @@ public class greedyBrain implements Brain {
         Vision vision = new Vision(player, map);
         List<TerrainSquare> visible = vision.getVisibleSquares();
 
+        if(visible.isEmpty()) {
+            player.rest();
+            player.printStatus();
+            return;
+        }
+
         TerrainSquare bestSquare = null;
-        int maxValue = 0;
+        int maxValue = Integer.MIN_VALUE;
 
         for (TerrainSquare square : visible) {
-            if (!player.canEnter(square)) continue;
+            if (square == null && !player.canEnter(square)) continue;
 
             int value = calculateSquareValue(square);
-
             if (value > maxValue) {
                 maxValue = value;
                 bestSquare = square;
@@ -26,6 +32,14 @@ public class greedyBrain implements Brain {
         if (bestSquare != null) {
             player.enter(bestSquare);
         } else {
+            Collections.shuffle(visible);
+            for(TerrainSquare square : visible) {
+                if(square != null || player.canEnter(bestSquare)) {
+                    player.enter(bestSquare);
+                    player.printStatus();
+                    return;
+                }
+            }
             player.rest();
         }
 
@@ -56,7 +70,6 @@ public class greedyBrain implements Brain {
         return value;
     }               
 }
-
 
 /*package src;
 
