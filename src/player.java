@@ -62,9 +62,32 @@ public class Player {
             Offer counterOffer;
 
             do {
-                int offerFood = getIntInput("Enter amount of FOOD to OFFER:");
-                int offerWater = getIntInput("Enter amount of WATER to OFFER:");
-                int offerGold = getIntInput("Enter amount of GOLD to OFFER:");
+                int offerFood;
+                do {
+                    offerFood = getIntInput("Enter amount of FOOD to OFFER:");
+                    if (offerFood > currentFood) {
+                        System.out.println("Choose a value that is within your budget!");
+                    }
+                
+                } while (offerFood > currentFood);
+
+                int offerWater;
+                do {
+                    offerWater = getIntInput("Enter amount of WATER to OFFER:");
+                    if (offerWater > currentWater) {
+                        System.out.println("Choose a value that is within your budget!");
+                    }
+                
+                } while (offerWater > currentWater);
+
+                int offerGold;
+                do {
+                    offerGold = getIntInput("Enter amount of GOLD to OFFER:");
+                    if (offerGold > gold) {
+                        System.out.println("Choose a value that is within your budget!");
+                    }
+                
+                } while (offerGold > gold);
 
                 int requestFood = getIntInput("Enter amount of FOOD you want to RECEIVE:");
                 int requestWater = getIntInput("Enter amount of WATER you want to RECEIVE:");
