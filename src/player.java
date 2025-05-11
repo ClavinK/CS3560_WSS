@@ -35,7 +35,7 @@ public class Player {
     }
 
     public void enter(TerrainSquare square) {
-        currentStrength -= square.getMovementCost();
+        currentStrength = Math.max(0, currentStrength - square.getMovementCost());
         currentFood -= square.getFoodCost();
         currentWater -= square.getWaterCost();
         position = square.getPosition();
@@ -128,7 +128,7 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return currentFood > 0 && currentWater > 0 && currentStrength > 0;
+        return currentFood > 0 && currentWater > 0;
     }
 
     public boolean hasWon(int mapWidth) {

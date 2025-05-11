@@ -2,7 +2,7 @@ package src;
 
 public class bargainerTrader implements Trader {
 
-    private int maxCounterOffers = 6;
+    private int maxCounterOffers = 5;
 
     @Override
     public Offer evaluateOffer(Offer playerOffer) {
@@ -20,9 +20,9 @@ public class bargainerTrader implements Trader {
             maxCounterOffers--;
             // Returns a slightly more demanding counter-offer
             return new Offer(
-                playerOffer.getOfferedFood() + 1,
-                playerOffer.getOfferedWater() + 1,
-                playerOffer.getOfferedGold(), // gold stays the same
+                playerOffer.getOfferedFood() + (int)((Math.random() * (2 - 1)) + 1),
+                playerOffer.getOfferedWater() + (int)((Math.random() * (2 - 1)) + 1),
+                playerOffer.getOfferedGold() + (int)((Math.random() * (2 - 1)) + 1),
                 playerOffer.getRequestedFood(),
                 playerOffer.getRequestedWater(),
                 playerOffer.getRequestedGold()

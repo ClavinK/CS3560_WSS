@@ -19,9 +19,9 @@ public class impatientTrader implements Trader {
             System.out.println("Impatient Trader: That's not enough. Here's my final offer.");
 
             return new Offer(
-                playerOffer.getOfferedFood() + 1,
-                playerOffer.getOfferedWater() + 1,
-                playerOffer.getOfferedGold(),
+                playerOffer.getOfferedFood() + (int)((Math.random() * (2 - 1)) + 1),
+                playerOffer.getOfferedWater() + (int)((Math.random() * (2 - 1)) + 1),
+                playerOffer.getOfferedGold() + (int)((Math.random() * (2 - 1)) + 1),
                 playerOffer.getRequestedFood(),
                 playerOffer.getRequestedWater(),
                 playerOffer.getRequestedGold()

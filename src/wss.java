@@ -65,6 +65,8 @@ public class wss {
             default -> new greedyBrain();
         };
 
+        // Select Vision type
+
         // Start simulation
         System.out.println("Starting Wilderness Survival Simulation...");
         System.out.println("Difficulty: " + difficulty + " | Brain: " + brainChoice);

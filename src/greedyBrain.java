@@ -68,7 +68,7 @@ public class greedyBrain implements Brain {
             value += itemCount;
         }
         return value;
-    }               
+    }
 }
 
 /*package src;
