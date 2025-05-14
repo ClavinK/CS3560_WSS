@@ -7,58 +7,25 @@ package src;
 public abstract class Item {
     protected boolean repeating;
 
+    /**
+     * Constructs an Item.
+     * @param repeating Whether the item can be collected multiple times.
+     */
     public Item(boolean repeating) {
         this.repeating = repeating;
     }
 
+    /**
+     * Checks if the item is repeating.
+     * @return True if the item can be collected multiple times, false otherwise.
+     */
     public boolean isRepeating() {
         return repeating;
     }
 
+    /**
+     * Defines how the item is collected by the player.
+     * @param p The player collecting the item.
+     */
     public abstract void collect(Player p);
-}
-
-class FoodBonus extends Item {
-    private int amount;
-
-    public FoodBonus(int amount, boolean repeating) {
-        super(repeating);
-        this.amount = amount;
-    }
-
-    @Override
-    public void collect(Player p) {
-        System.out.println("Collected Food Bonus (+" + amount + ")");
-        p.addFood(amount);
-    }
-}
-
-class WaterBonus extends Item {
-    private int amount;
-
-    public WaterBonus(int amount, boolean repeating) {
-        super(repeating);
-        this.amount = amount;
-    }
-
-    @Override
-    public void collect(Player p) {
-        System.out.println("Collected Water Bonus (+" + amount + ")");
-        p.addWater(amount);
-    }
-}
-
-class GoldBonus extends Item {
-    private int amount;
-
-    public GoldBonus(int amount, boolean repeating) {
-        super(repeating);
-        this.amount = amount;
-    }
-
-    @Override
-    public void collect(Player p) {
-        System.out.println("Collected Gold (+" + amount + ")");
-        p.addGold(amount);
-    }
 }
