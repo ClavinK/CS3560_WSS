@@ -17,7 +17,14 @@ public class farsightVision extends Vision {
         Position[] positions = {
             new Position(x + 1, y),
             new Position(x, y + 1),
-            new Position(x, y - 1)
+            new Position(x, y - 1),
+            new Position(x + 2, y),
+            new Position(x + 1, y + 1),
+            new Position(x + 1, y - 1),
+            new Position(x - 1, y),
+            new Position(x - 2, y),
+            new Position(x, y + 2),
+            new Position(x, y - 2)
         };
 
         for (Position position : positions) {

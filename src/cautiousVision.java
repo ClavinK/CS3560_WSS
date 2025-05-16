@@ -15,9 +15,9 @@ public class cautiousVision extends Vision {
         int x = pos.getX();
         int y = pos.getY();
         Position[] positions = {
-            new Position(x + 1, y),
             new Position(x, y + 1),
-            new Position(x, y - 1)
+            new Position(x, y - 1),
+            new Position(x + 1, y)
         };
 
         for (Position position : positions) {

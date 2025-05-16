@@ -17,7 +17,8 @@ public class keeneyedVision extends Vision {
         Position[] positions = {
             new Position(x + 1, y),
             new Position(x, y + 1),
-            new Position(x, y - 1)
+            new Position(x, y - 1),
+            new Position(x + 2, y)
         };
 
         for (Position position : positions) {
