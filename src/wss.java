@@ -45,6 +45,18 @@ public class wss {
                 "Explorer"            // Default selection
         );
 
+        // Prompt the user to select the brain type (AI behavior)
+        String[] visions = {"Focus", "Cautious", "Far-Sighted", "Keen-Eyed"};
+        String visionChoice = (String) JOptionPane.showInputDialog(
+                null,
+                "Select Vision Type:", // Message displayed to the user
+                "Game Setup",         // Title of the dialog box
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                visions,               // Options for the user to choose from
+                "Focus"            // Default selection
+        );        
+
         // Create the map and player based on the selected difficulty
         int width = 0;
         int height = 0;
@@ -74,10 +86,16 @@ public class wss {
         };
 
         // Select Vision type (currently not implemented)
+        Vision vision = switch (visionChoice) {
+            case "Focus" -> new focusVision(player, map); // AI that explores the map
+            case "Cautious" -> new cautiousVision(player, map); // AI that prioritizes survival
+            case "Far-Sighted" -> new farsightVision(player, map);
+            default -> new keeneyedVision(player, map);           // Default AI that prioritizes resources
+        };
 
         // Start the simulation
         System.out.println("Starting Wilderness Survival Simulation...");
-        System.out.println("Difficulty: " + difficulty + " | Brain: " + brainChoice);
+        System.out.println("Difficulty: " + difficulty + " | Brain: " + brainChoice + " | Vision: " + visionChoice);
         System.out.println("Goal: Reach the east edge without running out of strength, food, or water.");
 
         // Simulation loop
